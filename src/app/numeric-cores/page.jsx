@@ -1,16 +1,18 @@
 'use client'
+import styles from "./page.module.css";
 import { useState } from 'react'
 
-export default function Page() {
-    const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
+
+export default function Page() {
     const [coreWord, setCoreWord] = useState('');
-    const [coreNum1, setCoreNum1] = useState(0);
-    const [coreNum2, setCoreNum2] = useState(0);
-    const [coreNum3, setCoreNum3] = useState(0);
-    const [coreNum4, setCoreNum4] = useState(0);
+    const [coreNum1, setCoreNum1] = useState('');
+    const [coreNum2, setCoreNum2] = useState('');
+    const [coreNum3, setCoreNum3] = useState('');
+    const [coreNum4, setCoreNum4] = useState('');
     const [numericCore, setNumericCore] = useState([]);
-    const alphabeticCore = numericCore.map((num) => alphabet[num - 1]);
+    const alphabeticCore = getStringFromCoreHistory(numericCore);
 
     function calculateNumericCore() {
         let core1 = 0;
@@ -43,27 +45,34 @@ export default function Page() {
 
         const coredValue = getNumericCoreFromNumbers(core1, core2, core3, core4);
         console.log(coredValue);
-        if (coredValue > 0 && coredValue <= 26) {
-            setNumericCore([
-                ...numericCore,
-                coredValue
-            ]);
-        }
+        setNumericCore([
+            ...numericCore,
+            coredValue
+        ]);
     }
 
     return (
-        <div>
-            <form>
-                <input name='coreword' type='text' value={coreWord} onChange={e => setCoreWord(e.target.value)} />
-                <br />
-                <input name='corenum1' type='number' value={coreNum1} onChange={e => setCoreNum1(e.target.value)} />
-                <input name='corenum2' type='number' value={coreNum2} onChange={e => setCoreNum2(e.target.value)} />
-                <input name='corenum3' type='number' value={coreNum3} onChange={e => setCoreNum3(e.target.value)} />
-                <input name='corenum4' type='number' value={coreNum4} onChange={e => setCoreNum4(e.target.value)} />
-                <button onClick={calculateNumericCore} name='calculate' type='button'>Calculate</button>
-            </form>
-            <input name='numericcorenumber' value={numericCore} readOnly />
-            <input name='alphabeticcore' value={alphabeticCore} readOnly />
+        <div className={styles.page}>
+            <main className={styles.main}>
+                <form>
+                    <div>
+                        <input name='coreword' type='text' placeholder="4-Letter Word" value={coreWord} onChange={e => setCoreWord(e.target.value)} />
+                    </div>
+                    <div>
+                        <input name='corenum1' type='number' placeholder="1st Number" value={coreNum1} onChange={e => setCoreNum1(e.target.value)} />
+                        <input name='corenum2' type='number' placeholder="2nd Number" value={coreNum2} onChange={e => setCoreNum2(e.target.value)} />
+                        <input name='corenum3' type='number' placeholder="3rd Number" value={coreNum3} onChange={e => setCoreNum3(e.target.value)} />
+                        <input name='corenum4' type='number' placeholder="4th Number" value={coreNum4} onChange={e => setCoreNum4(e.target.value)} />
+                    </div>
+                    <div>
+                        <button onClick={calculateNumericCore} name='calculate' type='button'>Calculate</button>
+                    </div>
+                </form>
+                <label>Numeric Core History:</label>
+                <input name='numericcorenumber' value={numericCore} readOnly />
+                <label>Numeric Core Alphabetical Representation:</label>
+                <input name='alphabeticcore' value={alphabeticCore} readOnly />
+            </main>
         </div>
     );
 }
@@ -109,4 +118,18 @@ function getNumericCoreFromNumbers(num1, num2, num3, num4) {
 
     console.log(possibleResults);
     return Math.min(...possibleResults);
+}
+
+function getStringFromCoreHistory(coreHistory) {
+    const stringValue = [];
+    for (let i = 0; i < coreHistory.length; i++) {
+        const coreNumber = coreHistory[i];
+        if (coreNumber < 1 || coreNumber > 26) {
+            stringValue[i] = "-";
+        } else if (coreNumber >= 1 && coreNumber <= 26) {
+            stringValue[i] = alphabet[coreNumber - 1].toUpperCase();
+        }
+    }
+
+    return stringValue.join("");
 }

@@ -1,10 +1,12 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <Link href="numeric-cores" >Numeric Cores Solver</Link>
         <Image
           className={styles.logo}
           src="next.svg"
