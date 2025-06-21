@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import Image from 'next/image'
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,7 +20,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      {/* <Image className="backgroundImage" src='backgroundmtholly.svg' alt="Background image of Mount Holly" width="2000" height="2000" /> */}
+      <body className={`${geistSans.variable} ${geistMono.variable}`}
+        style={{
+          backgroundImage: `url(backgroundmtholly.svg)`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          width: "100vw",
+          width: "100vh",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
         {children}
       </body>
     </html>
