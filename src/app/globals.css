@@ -1,14 +1,14 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #618896;
+  --foreground: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #414141;
     --foreground: #ededed;
   }
-}
+} */
 
 html,
 body {
@@ -30,13 +30,85 @@ body {
   margin: 0;
 }
 
+.backgroundImage {
+  width: 100%;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+label {
+  margin: 0pt 4pt 0pt 4pt;
+}
+
+input {
+  border-style: solid;
+  border-color: #333;
+  background-color: #eee;
+  color: #000;
+  border-width: 2pt;
+  border-radius: 8pt;
+  padding: 12pt;
+  margin: 4pt;
+}
+
+input:focus {
+  outline-style: solid;
+  outline-width: 3pt;
+  outline-color: #3b84cc;
+}
+
+button {
+  border-style: none;
+  border-color: #ccc;
+  background-color: #286eb5;
+  color: #fff;
+  border-width: -2pt;
+  border-radius: 8pt;
+  padding: 12pt;
+  margin: 4pt;
+  cursor: pointer;
+}
+
+button:hover {
+  border-style: none;
+  border-color: #fff;
+  background-color: #3b84cc;
+  color: #fff;
+  border-width: -2pt;
+  border-radius: 8pt;
+  padding: 12pt;
+  margin: 4pt;
+  cursor: pointer;
+}
+
+button:active {
+  border-style: none;
+  border-color: #ccc;
+  background-color: #286eb5;
+  color: #fff;
+  border-width: -2pt;
+  border-radius: 8pt;
+  padding: 12pt;
+  margin: 4pt;
+  cursor: pointer;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
